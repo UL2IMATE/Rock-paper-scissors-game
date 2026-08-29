@@ -1,0 +1,14 @@
+{
+  "folders": [
+    {
+      "path": ".",
+    },
+    {
+      "path": "../font awsome/webfonts",
+    },
+  ],
+  "settings": {
+    "liveServer.settings.multiRootWorkspaceName": "Rock Paper Scissors game",
+    "liveServer.settings.port": 5502,
+  },
+}
