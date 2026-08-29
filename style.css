@@ -105,3 +105,13 @@ button
     display: inline;
     background-color: #9a9ca5;
 }
+footer
+{
+    margin-top: 20px;
+    text-align: center;
+    color: white;
+}
+footer p
+{
+    font-size: 15px;
+}
