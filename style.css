@@ -97,6 +97,10 @@ button
 .score p 
 {
     font-size: 20px;
+    span {
+        font-size: 25px;
+        color: #f5f5f5;
+    }
 }
 .wall
 {
