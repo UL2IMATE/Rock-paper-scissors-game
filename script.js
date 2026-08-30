@@ -4,11 +4,40 @@ const Scissors = document.getElementById("Scissors");
 const message = document.getElementById("message");
 const PlayerScore = document.getElementById("Score");
 const ComputerScore = document.getElementById("ComputerScore");
+const themeToggle = document.getElementById("theme-toggle");
 
 let computerChoice;
 let playerChoice;
 let score = 0;
 let computerScore = 0;
+
+// Initialize score displays
+PlayerScore.textContent = score;
+ComputerScore.textContent = computerScore;
+
+// Theme Toggle Logic
+function setTheme(theme) {
+  if (theme === "light") {
+    document.documentElement.setAttribute("data-theme", "light");
+  } else {
+    document.documentElement.removeAttribute("data-theme");
+  }
+}
+
+// Check saved theme preference
+const savedTheme = localStorage.getItem("theme");
+if (savedTheme) {
+  setTheme(savedTheme);
+}
+
+if (themeToggle) {
+  themeToggle.addEventListener("click", () => {
+    const isLight = document.documentElement.getAttribute("data-theme") === "light";
+    const newTheme = isLight ? "dark" : "light";
+    setTheme(newTheme);
+    localStorage.setItem("theme", newTheme);
+  });
+}
 
 Rock.addEventListener("click", () => {
   playerChoice = "Rock";

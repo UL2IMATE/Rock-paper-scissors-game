@@ -5,13 +5,88 @@
   font-family: monospace;
 }
 
+:root {
+  --bg-color: #0c102a;
+  --card-bg: #161c3d;
+  --border-color: rgba(153, 142, 142, 0.401);
+  --text-color: #ffffff;
+  --text-secondary: #9a9ca5;
+  --line-color: #2e3454;
+  --score-val-color: #f5f5f5;
+  --shadow-color: rgba(0, 0, 0, 0.3);
+  --toggle-bg: #161c3d;
+  --toggle-border: rgba(153, 142, 142, 0.4);
+  --toggle-color: #f59e0b;
+}
+
+[data-theme="light"] {
+  --bg-color: #f0f4f8;
+  --card-bg: #ffffff;
+  --border-color: rgba(0, 0, 0, 0.12);
+  --text-color: #1e293b;
+  --text-secondary: #64748b;
+  --line-color: #e2e8f0;
+  --score-val-color: #0f172a;
+  --shadow-color: rgba(0, 0, 0, 0.08);
+  --toggle-bg: #ffffff;
+  --toggle-border: rgba(0, 0, 0, 0.15);
+  --toggle-color: #4f46e5;
+}
+
 body {
-  background-color: #0c102a;
+  background-color: var(--bg-color);
+  color: var(--text-color);
   display: flex;
   flex-direction: column;
   min-height: 100vh;
   min-height: 100dvh;
   padding: 20px 15px;
+  position: relative;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2px solid var(--toggle-border);
+  background-color: var(--toggle-bg);
+  color: var(--toggle-color);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 12px var(--shadow-color);
+  z-index: 10;
+}
+
+.theme-toggle:hover {
+  transform: scale(1.1);
+}
+
+.theme-toggle:active {
+  transform: scale(0.95);
+}
+
+.sun-icon {
+  display: block;
+}
+
+.moon-icon {
+  display: none;
+}
+
+[data-theme="light"] .sun-icon {
+  display: none;
+}
+
+[data-theme="light"] .moon-icon {
+  display: block;
 }
 
 .container {
@@ -19,26 +94,30 @@ body {
   width: 100%;
   max-width: 680px;
   min-height: 360px;
-  border: 2px solid rgba(153, 142, 142, 0.401);
-  background: #161c3d;
+  border: 2px solid var(--border-color);
+  background: var(--card-bg);
+  box-shadow: 0 10px 30px var(--shadow-color);
   border-radius: 20px;
   padding: 25px 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .container h1 {
-  color: white;
+  color: var(--text-color);
   text-align: center;
   font-size: clamp(1.6rem, 5vw, 2.5rem);
+  transition: color 0.3s ease;
 }
 
 .line {
   height: 2px;
   width: 100%;
   margin-top: 20px;
-  background-color: #2e3454;
+  background-color: var(--line-color);
+  transition: background-color 0.3s ease;
 }
 
 .buttons {
@@ -51,7 +130,7 @@ body {
   width: 100%;
 }
 
-button {
+.buttons button {
   font-size: clamp(1.1rem, 2.5vw, 1.4rem);
   padding: 16px 36px;
   border: none;
@@ -64,12 +143,12 @@ button {
   max-width: 180px;
 }
 
-button:hover {
+.buttons button:hover {
   transform: translateY(-2px);
   filter: brightness(1.1);
 }
 
-button:active {
+.buttons button:active {
   transform: scale(0.96);
 }
 
@@ -97,22 +176,25 @@ button:active {
 .message p {
   text-align: center;
   font-size: clamp(1.1rem, 3.5vw, 1.5rem);
-  color: white;
+  color: var(--text-color);
+  transition: color 0.3s ease;
 }
 
 .hr {
   width: 94%;
   margin: 15px auto;
-  background-color: #2e3454;
+  background-color: var(--line-color);
   border: none;
   height: 2px;
-  opacity: 0.4;
+  opacity: 0.8;
+  transition: background-color 0.3s ease;
 }
 
 .score {
   margin-top: 10px;
   text-align: center;
-  color: white;
+  color: var(--text-color);
+  transition: color 0.3s ease;
 }
 
 .score p {
@@ -121,20 +203,22 @@ button:active {
 
 .score p span {
   font-size: clamp(1.2rem, 3.5vw, 1.55rem);
-  color: #f5f5f5;
+  color: var(--score-val-color);
+  transition: color 0.3s ease;
 }
 
 .wall {
   height: 5px;
   width: 2px;
   display: inline;
-  background-color: #9a9ca5;
+  background-color: var(--text-secondary);
 }
 
 footer {
   text-align: center;
-  color: #9a9ca5;
+  color: var(--text-secondary);
   padding: 20px 10px 10px;
+  transition: color 0.3s ease;
 }
 
 footer p {
@@ -143,6 +227,13 @@ footer p {
 }
 
 @media (max-width: 480px) {
+  .theme-toggle {
+    top: 12px;
+    right: 12px;
+    width: 38px;
+    height: 38px;
+  }
+
   .container {
     padding: 20px 15px;
     border-radius: 15px;
@@ -153,7 +244,7 @@ footer p {
     margin-top: 25px;
   }
 
-  button {
+  .buttons button {
     padding: 12px 15px;
     flex: 1 1 90px;
   }
